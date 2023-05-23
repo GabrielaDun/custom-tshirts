@@ -9,6 +9,13 @@ const Product = props => {
   const [currentSize, setCurrentSize] = useState(props.sizes[0].name);
   console.log(currentSize);
   console.log(currentColor);
+  
+
+  const capitalLetterColors = color => {
+    return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
+  }
+
+
 
 
   return (
@@ -28,18 +35,26 @@ const Product = props => {
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
-              <li><button type="button">S</button></li>
-              <li><button type="button">M</button></li>
-              <li><button type="button">L</button></li>
-              <li><button type="button">XL</button></li>
+              {props.sizes.map(size =>
+                <li key={size.name}><button type="button">
+                  {size.name}
+                </button></li>
+                )}
             </ul>
           </div>
           <div className={styles.colors}>
             <h3 className={styles.optionLabel}>Colors</h3>
             <ul className={styles.choices}>
-              <li><button type="button" className={clsx(styles.colorBlack, styles.active)} /></li>
-              <li><button type="button" className={clsx(styles.colorRed)} /></li>
-              <li><button type="button" className={clsx(styles.colorWhite)} /></li>
+              {props.colors.map(item =>
+                <li key={item}>
+                  <button 
+                    onClick={() => setCurrentColor(item)}
+                    type="button" 
+                    className={clsx(capitalLetterColors(item), 
+                    item === props.color && styles.active)} 
+                  /> 
+                </li>
+              )}
             </ul>
           </div>
           <Button className={styles.button}>
