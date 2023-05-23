@@ -21,6 +21,18 @@ const Product = props => {
       return (props.basePrice + currentAddedPrice );
   }
 
+  const infoPack = (event) => {
+    event.preventDefault;
+    return console.log (
+      "Summery",
+      "=========",
+      "Name: ", props.name,
+      "Price: " ,
+      "Size: " ,
+      "Color: "
+    )
+  }
+
   return (
     <article className={styles.product}>
       <div className={styles.imageContainer}>
@@ -64,7 +76,7 @@ const Product = props => {
               )}
             </ul>
           </div>
-          <Button className={styles.button}>
+          <Button className={styles.button} onClick={infoPack()}>
             <span className="fa fa-shopping-cart" />
           </Button>
         </form>
