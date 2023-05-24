@@ -1,7 +1,7 @@
 import styles from './Product.module.scss';
 import clsx from 'clsx';
 import Button from '../Button/Button';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 
 const Product = props => {
@@ -22,7 +22,8 @@ const Product = props => {
   }
 
   const infoPack = (event) => {
-    event.preventDefault;
+    console.log(event);
+    event.preventDefault();
     return console.log (
       "Summery",
       "=========",
@@ -70,13 +71,13 @@ const Product = props => {
                     onClick={() => setCurrentColor(item)}
                     type="button" 
                     className={clsx(capitalLetterColors(item), 
-                    item === props.color && styles.active)} 
+                    item === currentColor && styles.active)} 
                   /> 
                 </li>
               )}
             </ul>
           </div>
-          <Button className={styles.button} onClick={infoPack()}>
+          <Button className={styles.button} onSubmit={() => infoPack(event)}>
             <span className="fa fa-shopping-cart" />
           </Button>
         </form>
