@@ -1,6 +1,7 @@
 import styles from './ProductOptions.module.scss';
 import clsx from 'clsx';
 import Button from '../Button/Button';
+import OptionSize from '../OptionSize/OptionSize'
 
 
 const ProductOptions = props => {
@@ -13,20 +14,11 @@ const ProductOptions = props => {
     
     return (
         <form onSubmit={props.action}>
-            <div className={styles.sizes}>
-                <h3 className={styles.optionLabel}>Sizes</h3>
-                <ul className={styles.choices}>
-                {props.sizes.map(size =>
-                    <li key={size.name}>
-                    <button 
-                        type="button"
-                        onClick={() => {props.onClickSize(size); props.onClickPrice(size.additionalPrice)}}>
-                        {size.name}
-                    </button>
-                    </li>
-                    )}
-                </ul>
-            </div>
+            <OptionSize 
+                sizes={props.sizes} 
+                onClickSize={props.onClickSize}
+                onClickPrice={props.onClickPrice}
+                />
             <div className={styles.colors}>
                 <h3 className={styles.optionLabel}>Colors</h3>
                 <ul className={styles.choices}>
