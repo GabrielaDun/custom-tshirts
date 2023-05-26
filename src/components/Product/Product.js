@@ -2,6 +2,7 @@ import styles from './Product.module.scss';
 import clsx from 'clsx';
 import Button from '../Button/Button';
 import { useMemo, useState } from 'react';
+import ProductImage from '../ProductImage/ProductImage';
 
 
 const Product = props => {
@@ -21,33 +22,31 @@ const Product = props => {
       return (props.basePrice + currentAddedPrice );
   }
 
-  const infoPack = (event) => {
+  const priceOfTheItem = currentAddedPrice + props.basePrice;
+
+  const infoPack = event => {
     console.log(event);
     event.preventDefault();
     return console.log (
       "Summery",
       "=========",
-      "Name: ", props.name,
-      "Price: " ,
-      "Size: " ,
-      "Color: "
+      "Name: ", props.title,
+      "Price: ", priceOfTheItem,
+      "Size: ", currentSize,
+      "Color: ", currentColor,
     )
   }
 
+
   return (
     <article className={styles.product}>
-      <div className={styles.imageContainer}>
-        <img 
-          className={styles.image}
-          alt="Kodilla shirt"
-          src={`${process.env.PUBLIC_URL}/images/products/shirt-${props.name}--${currentColor}.jpg`} />
-      </div>
+      <ProductImage title={props.name} color={currentColor}/>
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
           <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
-        <form>
+        <form onSubmit={infoPack}>
           <div className={styles.sizes}>
             <h3 className={styles.optionLabel}>Sizes</h3>
             <ul className={styles.choices}>
@@ -77,7 +76,7 @@ const Product = props => {
               )}
             </ul>
           </div>
-          <Button className={styles.button} onSubmit={() => infoPack(event)}>
+          <Button className={styles.button} >
             <span className="fa fa-shopping-cart" />
           </Button>
         </form>
