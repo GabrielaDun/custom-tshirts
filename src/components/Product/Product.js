@@ -13,10 +13,11 @@ const Product = props => {
   console.log(currentAddedPrice);
   
 
-  const getPrice = () => {
-      return (props.basePrice + currentAddedPrice );
-  }
 
+  const getPrice = useMemo(() => {
+    return (() => (props.basePrice + currentAddedPrice) )
+  }, [currentAddedPrice]);
+  
   const priceOfTheItem = currentAddedPrice + props.basePrice;
 
   const infoPack = event => {
